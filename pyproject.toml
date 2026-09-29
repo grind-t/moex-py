@@ -1,0 +1,28 @@
+[project]
+name = "grind-t-moex"
+version = "0.1.0"
+description = "Async Python client for the Moscow Exchange ISS API"
+readme = "README.md"
+authors = [
+    { name = "grind-t", email = "grindt.gd@gmail.com" }
+]
+requires-python = ">=3.10"
+dependencies = [
+    "httpx>=0.28.1",
+]
+
+[build-system]
+requires = ["uv_build>=0.12.9,<0.13.0"]
+build-backend = "uv_build"
+
+[tool.uv.build-backend]
+module-name = "moex"
+
+[tool.pytest.ini_options]
+asyncio_mode = "auto"
+
+[dependency-groups]
+dev = [
+    "pytest>=9.1.1",
+    "pytest-asyncio>=1.4.0",
+]
