@@ -1,21 +1,23 @@
-from typing import Literal, TypedDict
+from datetime import date
+from typing import Literal
 
 import httpx
+from pydantic import BaseModel
 
 from .core.fetch import moex_fetch
 
 
-class MoexBondAmortization(TypedDict):
+class MoexBondAmortization(BaseModel):
     isin: str
     name: str
     issuevalue: int
-    amortdate: str
-    facevalue: float
+    amortdate: date
+    facevalue: float | None
     initialfacevalue: float
     faceunit: str
-    valueprc: float
-    value: float
-    value_rub: float
+    valueprc: float | None
+    value: float | None
+    value_rub: float | None
     data_source: str
     secid: str
     primary_boardid: str
@@ -31,7 +33,7 @@ async def get_moex_bond_amortizations(
     start: int | None = None,
     client: httpx.AsyncClient | None = None,
 ) -> list[MoexBondAmortization]:
-    return await moex_fetch(
+    rows = await moex_fetch(
         f"securities/{id}/bondization.json",
         "amortizations",
         {
@@ -43,3 +45,4 @@ async def get_moex_bond_amortizations(
         },
         client,
     )
+    return [MoexBondAmortization.model_validate(row) for row in rows]

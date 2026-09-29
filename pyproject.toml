@@ -9,6 +9,7 @@ authors = [
 requires-python = ">=3.10"
 dependencies = [
     "httpx>=0.28.1",
+    "pydantic>=2.13.5",
 ]
 
 [build-system]
@@ -20,6 +21,7 @@ module-name = "moex"
 
 [tool.pytest.ini_options]
 asyncio_mode = "auto"
+markers = ["e2e: hits the live MOEX ISS API"]
 
 [dependency-groups]
 dev = [
