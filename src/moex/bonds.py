@@ -41,7 +41,7 @@ class MoexBond(BaseModel):
     PREVDATE: MaybeDate
     SECNAME: str = Field(min_length=1)
     REMARKS: str | None = Field(pattern=r"^[A-Z]+$")
-    MARKETCODE: str = Field(pattern=r"^[A-Z]{4}$")
+    MARKETCODE: str = Field(pattern=r"^[A-Z]{3,4}$")
     INSTRID: str = Field(pattern=r"^[A-Z]{4}$")
     # Always null in live data.
     SECTORID: None

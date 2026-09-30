@@ -20,8 +20,8 @@ class MoexBondMarketData(BaseModel):
     # for this and the other non-nullable numeric fields below when there is no
     # data, even for bonds that did not trade.
     SPREAD: float
-    BIDDEPTHT: int = Field(ge=0)
-    OFFERDEPTHT: int = Field(ge=0)
+    BIDDEPTHT: int | None = Field(ge=0)
+    OFFERDEPTHT: int | None = Field(ge=0)
     # None when the bond has not traded today.
     OPEN: float | None = Field(gt=0)
     LOW: float | None = Field(gt=0)
@@ -51,8 +51,8 @@ class MoexBondMarketData(BaseModel):
     VALTODAY: int | None = Field(ge=0)
     VALTODAY_USD: int | None = Field(ge=0)
     BOARDID: str = Field(pattern=r"^[A-Z0-9]{4}$")
-    # Open set of one-letter codes (N, T, B, C seen so far).
-    TRADINGSTATUS: str = Field(pattern=r"^[A-Z]$")
+    # Open set of one-letter codes (N, T, B, C, a seen so far).
+    TRADINGSTATUS: str = Field(pattern=r"^[A-Za-z]$")
     UPDATETIME: time
     # In days; 0 when not computed.
     DURATION: int = Field(ge=0)
