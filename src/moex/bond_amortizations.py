@@ -2,7 +2,7 @@ from datetime import date
 from typing import Literal
 
 import httpx
-from pydantic import BaseModel, ConfigDict, Field
+from pydantic import BaseModel, Field
 
 from .core.fetch import moex_fetch
 
@@ -12,7 +12,7 @@ class MoexBondAmortization(BaseModel):
     name: str = Field(min_length=1)
     # Not always whole: e.g. gold-linked bonds have a fractional issue volume.
     issuevalue: float = Field(gt=0)
-    amortdate: date = Field(strict=False)
+    amortdate: date
     facevalue: float = Field(gt=0)
     initialfacevalue: float = Field(gt=0)
     faceunit: str = Field(pattern=r"^[A-Z]{3}$")
