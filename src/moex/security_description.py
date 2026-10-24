@@ -83,7 +83,7 @@ class MoexSecurityDescription(BaseModel):
         | None
     ) = None
     EARLYREPAYMENT: bool | None = None
-    COUPON_BENCHMARK: str | None = Field(default=None, pattern=r"^[A-Z]+$")
+    COUPON_BENCHMARK: str | None = Field(default=None, pattern=r"^[A-Z0-9_]+$")
     # ISS declares it a string, e.g. "1.30".
     COUPON_BENCHMARK_SPREAD: str | None = Field(
         default=None, pattern=r"^-?[0-9]+\.[0-9]+$"
